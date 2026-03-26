@@ -1,0 +1,2913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<title>SEI Finance – Cognitive Intelligence for Capital Markets</title>
+<meta name="description" content="SEI Finance builds the cognitive intelligence layer for next-generation capital markets. From data to meaning – bridging ASEAN and EU financial systems.">
+<link rel="icon" href="./assets/icons/favicon-light.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="./assets/icons/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="./assets/icons/favicon-light.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SEI Finance – Cognitive Intelligence for Capital Markets">
+<meta property="og:description" content="SEI Finance builds the cognitive intelligence layer for next-generation capital markets. From data to meaning – bridging ASEAN and EU financial systems.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EPNQ0735DY"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){window.dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-EPNQ0735DY');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500&family=Geist:wght@300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+/* ==========================================
+   DESIGN TOKENS (from Framer CSS variables)
+   ========================================== */
+:root {
+  --color-bg-light: #f7f7f7;
+  --color-white: #fff;
+  --color-text-dark: rgb(37, 46, 61);
+  --color-text-light: rgb(231, 230, 250);
+  --color-purple: rgb(96, 93, 186);
+  --color-blue: rgb(63, 120, 224);
+  --color-teal: rgb(80, 187, 204);
+  --color-blue-deep: rgb(63, 66, 224);
+  --color-purple-faint: rgba(96, 93, 186, 0.15);
+  --color-gray-border: #e5e7eb;
+  --color-gray-500: #6b7280;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Figtree', sans-serif;
+  --font-mono: 'Geist', sans-serif;
+  --max-w: 1440px;
+  --pad: 60px;
+  --gradient-purple-blue: linear-gradient(115deg, var(--color-purple) 0%, var(--color-blue) 100%);
+  --gradient-btn: linear-gradient(142deg, var(--color-purple) 0%, var(--color-blue) 100%);
+  --card-shadow: 0 0.48px 1.06px -0.42px rgba(16,49,77,0.04),
+                 0 1.83px 4.03px -0.83px rgba(16,49,77,0.05),
+                 0 8px 17.6px -1.25px rgba(16,49,77,0.11);
+}
+
+/* ==========================================
+   RESET & BASE
+   ========================================== */
+*, *::before, *::after { box-sizing: border-box; }
+* { overflow-wrap: break-word; word-break: normal; }
+html, body { margin: 0; padding: 0; }
+h1,h2,h3,h4,h5,h6,p,figure,ul { margin: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  background: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+ul { list-style: none; padding: 0; }
+
+/* ==========================================
+   UTILITIES
+   ========================================== */
+.gradient-text {
+  background: var(--gradient-purple-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+.text-purple { color: var(--color-purple); }
+
+/* ==========================================
+   BLUR REVEAL ANIMATIONS
+   ========================================== */
+/* Word wrappers prevent mid-word line breaks */
+.char-reveal [data-word] {
+  display: inline;
+  white-space: nowrap;
+}
+/* Only animate character spans inside word wrappers */
+.char-reveal [data-word] > span {
+  display: inline-block;
+  opacity: 0.001;
+  filter: blur(10px);
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, filter 0.4s ease, transform 0.4s ease;
+}
+.char-reveal.revealed [data-word] > span {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+.blur-reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, filter 0.6s ease, transform 0.6s ease;
+}
+.blur-reveal.revealed {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+.stagger-group .blur-reveal:nth-child(2) { transition-delay: 0.1s; }
+.stagger-group .blur-reveal:nth-child(3) { transition-delay: 0.2s; }
+.stagger-group .blur-reveal:nth-child(4) { transition-delay: 0.3s; }
+.stagger-group .blur-reveal:nth-child(5) { transition-delay: 0.4s; }
+
+/* ==========================================
+   VIDEO BACKGROUND
+   ========================================== */
+.video-bg {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-bg video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.video-bg .overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(
+    rgba(11,11,15,0.5) 0%,
+    rgba(11,11,15,0.8) 34%,
+    rgba(11,11,15,0.9) 100%
+  );
+  z-index: 1;
+}
+
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+.hero {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-container {
+  width: 100%;
+  max-width: var(--max-w);
+  height: 825px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-content {
+  position: absolute;
+  top: 188px; left: 114px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+  z-index: 2;
+}
+.hero-text-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 40px;
+  width: 960px;
+  max-width: calc(100vw - 140px);
+}
+.hero h1 {
+  font-family: var(--font-heading);
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 1em;
+  color: var(--color-white);
+}
+.hero-headline {
+  font-family: var(--font-heading);
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 1em;
+  color: var(--color-white);
+}
+.hero .hero-subtitle {
+  font-family: var(--font-body);
+  font-size: 24px;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  max-width: 89%;
+}
+.hero .hero-tagline {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgb(129, 127, 227);
+}
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================
+   BUTTONS
+   ========================================== */
+.btn-gradient {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: var(--gradient-btn);
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-white);
+  transition: opacity 0.2s, transform 0.2s;
+  white-space: nowrap;
+  cursor: pointer;
+  border: none;
+  line-height: 1.6;
+}
+.btn-gradient:hover { opacity: 0.9; transform: scale(1.02); }
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 32px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s;
+  line-height: 1.6;
+}
+.btn-glass:hover { background: rgba(255,255,255,0.8); }
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-text-light);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text-light);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.btn-outline:hover { opacity: 0.8; }
+.btn-outline img { width: 20px; height: 20px; }
+
+/* ==========================================
+   FEATURE SECTION (light background wrapper)
+   ========================================== */
+.section-feature {
+  position: relative;
+  z-index: 1;
+  background: var(--color-bg-light);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+}
+
+/* Decorative skewed light bars */
+.lights-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0.5;
+  background: radial-gradient(100% 100% at 0 0, #d1d1d1 0%, #f6fbff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  mask: radial-gradient(125% 100% at 0 0, #000 0%, rgba(0,0,0,0.22) 88%, transparent 100%);
+  -webkit-mask: radial-gradient(125% 100% at 0 0, #000 0%, rgba(0,0,0,0.22) 88%, transparent 100%);
+  z-index: 0;
+}
+.light-bar {
+  flex: none;
+  max-width: 960px;
+  height: 1269px;
+  background: linear-gradient(rgba(255,255,255,0.5) 0%, #fff 84%, transparent 100%);
+  transform: skewX(45deg);
+  mask: linear-gradient(90deg, transparent 0%, #000 20%, rgba(0,0,0,0.55) 42%, transparent 67%, #000 78%, transparent 97%);
+  -webkit-mask: linear-gradient(90deg, transparent 0%, #000 20%, rgba(0,0,0,0.55) 42%, transparent 67%, #000 78%, transparent 97%);
+}
+.light-bar:nth-child(1) { width: 582px; }
+.light-bar:nth-child(2) { width: 591px; }
+.light-bar:nth-child(3) { width: 441px; }
+.light-bar:nth-child(4) { width: 683px; opacity: 0.6; }
+.light-bar:nth-child(5) { width: 426px; opacity: 0.75; }
+
+/* ==========================================
+   WHAT SEI IS (centered text section)
+   ========================================== */
+.what-sei-is {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 100px var(--pad) 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+}
+
+.section-title-centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+.section-badge {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.section-title-centered h2 {
+  font-family: var(--font-heading);
+  font-size: 44px;
+  font-weight: 600;
+  text-align: center;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+}
+.section-desc {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-text-dark);
+  width: 70%;
+}
+
+/* ==========================================
+   THE CHALLENGE / THE SHIFT (two-col sections)
+   ========================================== */
+.subsection {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 80px 60px 0 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+  overflow: hidden;
+}
+.subsection.shift {
+  padding: 133px 60px 114px 120px;
+}
+
+/* Section title: badge top-left, h2 below */
+.subsection-title {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.subsection-title h2 {
+  font-family: var(--font-heading);
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+}
+
+/* Two-column grid: 4 cols, content spans 2 each */
+.two-col-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  grid-template-rows: repeat(2, min-content);
+  gap: 10px 20px;
+  width: 90%;
+  height: 372px;
+}
+/* Shift section uses full-width grid */
+.subsection.shift .two-col-grid {
+  width: 100%;
+  height: min-content;
+  gap: 20px 30px;
+}
+.two-col-text {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+}
+.two-col-text p {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  text-align: left;
+}
+.two-col-text ul {
+  list-style: disc;
+  padding-left: 28px;
+}
+.two-col-text ul li {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  margin-bottom: 8px;
+}
+.two-col-text .italic-summary {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+.two-col-text .italic-summary .text-purple {
+  color: var(--color-purple);
+  -webkit-text-fill-color: var(--color-purple);
+}
+.two-col-image {
+  grid-column: span 2;
+  width: 100%;
+  height: 306px;
+  border-radius: 10px;
+  overflow: hidden;
+  align-self: center;
+}
+.two-col-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* ==========================================
+   THE SOLUTION (text left + 2-col cards right)
+   ========================================== */
+.solution-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 100px var(--pad) 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 50px;
+}
+.solution-header {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  gap: 20px;
+  width: 100%;
+  align-items: flex-start;
+}
+.solution-header h2 {
+  grid-column: span 2;
+  font-family: var(--font-heading);
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+  text-align: left;
+}
+.solution-body {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  grid-template-rows: repeat(2, min-content);
+  gap: 20px;
+  width: 100%;
+}
+.solution-text {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  place-self: center;
+  width: 100%;
+  height: 100%;
+}
+.solution-text p {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  max-width: 313px;
+}
+.solution-text .crf-label { font-weight: 400; }
+/* Empty space filler for grid row 2, col 1 */
+.grid-spacer {
+  place-self: center;
+  width: 100%;
+  height: 100%;
+}
+/* --- Shared card base --- */
+.intel-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-faint);
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+.card-text-wrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.intel-card h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  text-transform: capitalize;
+  margin: 0;
+}
+.intel-card .card-text-wrap p {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-text-dark);
+  margin: 0;
+}
+/* Context + Narrative cards use Geist */
+.intel-card.font-geist h3 {
+  font-family: var(--font-mono);
+}
+.intel-card.font-geist .card-text-wrap p {
+  font-family: var(--font-mono);
+}
+/* --- Card illustration area (Chat/Detect container) --- */
+.card-illustration {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========== SIGNAL INTELLIGENCE ========== */
+.signal-blur-1 {
+  position: absolute; width: 86px; height: 82px;
+  border-radius: 999px; background: var(--color-teal);
+  filter: blur(52px); opacity: 0.2;
+  top: 29px; left: 53px; z-index: 1;
+}
+.signal-blur-2 {
+  position: absolute; width: 208px; height: 139px;
+  border-radius: 999px; background: var(--color-blue-deep);
+  filter: blur(52px); opacity: 0.3;
+  top: 57px; left: calc(48.5% - 104px); z-index: 1;
+}
+.signal-blur-3 {
+  position: absolute; width: 92px; height: 89px;
+  border-radius: 999px; background: var(--color-teal);
+  filter: blur(52px); opacity: 0.3;
+  bottom: 98px; right: 86px; z-index: 1;
+}
+/* Waveform container — Framer: min-width 206px, height 78px */
+.waveform-wrap {
+  position: relative;
+  min-width: 206px;
+  height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: visible;
+}
+/* Ghost + Blue bar rows — Framer: top 19px, gap 5.85px */
+.waveform-bars {
+  position: absolute;
+  top: 19px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5.85px;
+}
+.waveform-bars .bar {
+  width: 2px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.waveform-bars.ghost .bar { background: var(--color-white); }
+.waveform-bars.active .bar { background: var(--color-blue); }
+.waveform-bars.active { z-index: 1; }
+/* Needle — Framer: 2px, 100% height, z-index 4, purple with cyan glow */
+.waveform-needle {
+  position: absolute;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--color-purple);
+  z-index: 4;
+  overflow: visible;
+  box-shadow:
+    0.74px 0 0.74px 0 rgba(48,207,255,0.03),
+    2.02px 0 2.02px 0 rgba(48,207,255,0.08),
+    4.43px 0 4.43px 0 rgba(48,207,255,0.18),
+    9.83px 0 9.83px 0 rgba(48,207,255,0.39),
+    25px 0 25px 0 rgb(48,207,255),
+    -0.74px 0 0.74px 0 rgba(48,207,255,0.03),
+    -2.02px 0 2.02px 0 rgba(48,207,255,0.08),
+    -4.43px 0 4.43px 0 rgba(48,207,255,0.18),
+    -9.83px 0 9.83px 0 rgba(48,207,255,0.39),
+    -25px 0 25px 0 rgb(48,207,255);
+}
+.waveform-diamond {
+  position: absolute;
+  bottom: -6px; left: -4px; right: -4px;
+  height: 10px;
+  aspect-ratio: 1;
+  background: var(--color-purple);
+  transform: rotate(45deg);
+}
+
+/* ========== NARRATIVE INTELLIGENCE ========== */
+.narrative-blur-1 {
+  position: absolute; width: 92px; height: 89px;
+  border-radius: 999px; background: var(--color-teal);
+  filter: blur(52px); opacity: 0.3;
+  top: 72px; left: 65px; z-index: 1;
+}
+.narrative-blur-2 {
+  position: absolute; width: 192px; height: 149px;
+  border-radius: 999px; background: var(--color-blue-deep);
+  filter: blur(52px); opacity: 0.2;
+  top: calc(47% - 75px); left: calc(54% - 96px); z-index: 1;
+}
+.narrative-scan {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.narrative-doc {
+  position: relative;
+  width: 144px;
+  height: 170px;
+  background: #fff;
+  border-radius: 0;
+  box-shadow: 0 3px 15px 0 rgba(96, 93, 186, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px;
+  overflow: hidden;
+}
+.narrative-doc .paper-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 170px;
+  background: rgba(255, 255, 255, 0.5);
+  z-index: 3;
+  animation: narrative-scan-paper 6s ease-in-out infinite alternate;
+}
+.narrative-doc .doc-lines-wrap {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5.5px;
+  padding-top: 2px;
+}
+.narrative-doc .doc-line {
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-text-dark);
+  opacity: 0.25;
+  border-radius: 0;
+}
+.narrative-doc .doc-gradient {
+  position: absolute;
+  top: 171px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 144px;
+  min-height: 75px;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: narrative-scan-gradient 6s ease-in-out infinite alternate;
+}
+.narrative-doc .doc-gradient .grad-line {
+  width: 144px;
+  height: 1px;
+  background: var(--color-purple);
+}
+.narrative-doc .doc-gradient .grad-fade {
+  width: 144px;
+  height: 75px;
+  background: linear-gradient(180deg, rgba(96, 93, 186, 0.7) 0%, rgba(63, 120, 224, 0.3) 37%, transparent 100%);
+  opacity: 0.6;
+}
+/* Scan animation: paper overlay slides up revealing text, gradient line scans up */
+@keyframes narrative-scan-paper {
+  0% { top: 0px; }
+  100% { top: -220px; }
+}
+@keyframes narrative-scan-gradient {
+  0% { top: 171px; }
+  100% { top: -75px; }
+}
+
+/* ========== CONTEXT INTELLIGENCE ========== */
+/* Context card uses NO .card-illustration wrapper — all elements are absolutely positioned inside the card */
+.context-blur-1 {
+  position: absolute; width: 92px; height: 89px;
+  border-radius: 999px; background: var(--color-teal);
+  filter: blur(52px); opacity: 0.3;
+  top: 17px; left: 50px; z-index: 1;
+}
+.context-blur-2 {
+  position: absolute; width: 172px; height: 140px;
+  border-radius: 999px; background: var(--color-blue-deep);
+  filter: blur(52px); opacity: 0.2;
+  top: 65px; left: 48px; z-index: 1;
+}
+.context-blur-3 {
+  position: absolute; width: 92px; height: 89px;
+  border-radius: 999px; background: var(--color-teal);
+  filter: blur(52px); opacity: 0.3;
+  top: 24px; right: 31px; z-index: 1;
+}
+/* Chat area — 200px illustration zone */
+.context-chat {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+/* Orb BG — Framer: blur(10px), opacity 0.6, centered on icons */
+.context-orb-wrap {
+  position: absolute;
+  z-index: 0;
+  top: 118px; left: 50%;
+  transform: translate(-50%, -50%);
+  filter: blur(15px);
+  opacity: 0.5;
+}
+.context-orb {
+  width: 100px; height: 100px;
+  border-radius: 999px;
+  background: linear-gradient(229deg, var(--color-purple) 13%, rgba(96,93,186,0.3) 35%, rgba(63,120,224,0.6) 64%, var(--color-blue) 88%);
+}
+/* Icon containers — positioned absolutely for the Venn diagram SVG */
+.context-icon-wrap {
+  position: absolute;
+  z-index: 1;
+  width: 64px; height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 86px; left: 50%;
+  transform: translateX(-50%);
+  padding-top: 2px;
+}
+/* Scanning bracket frame — Framer: 306×194px, top 20px, centered */
+.scan-frame {
+  position: absolute;
+  width: 306px; height: 194px;
+  top: 20px;
+  left: calc(50% - 153px);
+  z-index: 1;
+  overflow: hidden;
+}
+/* Corner L-brackets using direct SVG-like approach */
+.scan-corner-tl, .scan-corner-tr, .scan-corner-bl, .scan-corner-br {
+  position: absolute;
+  z-index: 1;
+}
+.scan-corner-tl {
+  top: 0; left: 0;
+  width: 26px; height: 26px;
+  border-top: 3px solid #c6c5e0;
+  border-left: 3px solid #c6c5e0;
+}
+.scan-corner-tr {
+  top: 0; right: 0;
+  width: 26px; height: 26px;
+  border-top: 3px solid #c6c5e0;
+  border-right: 3px solid #c6c5e0;
+}
+.scan-corner-bl {
+  bottom: 0; left: 0;
+  width: 26px; height: 26px;
+  border-bottom: 3px solid #c6c5e0;
+  border-left: 3px solid #c6c5e0;
+}
+.scan-corner-br {
+  bottom: 0; right: 0;
+  width: 26px; height: 26px;
+  border-bottom: 3px solid #c6c5e0;
+  border-right: 3px solid #c6c5e0;
+}
+/* ==========================================
+   THE RESULT (comparison table)
+   ========================================== */
+.result-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 80px 120px 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+.result-section .section-title-centered { margin-bottom: 80px; }
+.result-section .comparison-headers { margin-bottom: 0; }
+.result-section .comparison-content { margin-top: 0; margin-bottom: 40px; }
+.result-section .result-tagline { margin-bottom: 0; }
+/* Table header row */
+.comparison-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  padding: 0 0 20px;
+}
+.comparison-headers span {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0;
+}
+.comparison-headers .col-before { color: var(--color-text-dark); }
+.comparison-headers .col-after { color: rgb(87, 60, 255); }
+/* Table content rows */
+.comparison-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+.comparison-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+}
+.comparison-cell {
+  background: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.4;
+  padding: 20px;
+  color: rgb(115, 115, 115);
+}
+.comparison-cell.before { font-weight: 400; }
+.comparison-cell.after { font-weight: 500; }
+.result-tagline {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  color: var(--color-purple);
+  width: 100%;
+}
+
+/* ==========================================
+   WHY SEI WINS (sticky left + scrolling right timeline)
+   ========================================== */
+.whysei-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 50px 120px 100px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 60px;
+}
+/* Left sticky column */
+.whysei-left {
+  position: sticky;
+  top: 120px;
+  flex: 1 0 0;
+  max-width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+.whysei-left h2 {
+  font-family: var(--font-heading);
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+}
+.whysei-left .body-text {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  margin-top: 20px;
+}
+.whysei-left .body-text strong {
+  font-weight: 500;
+  font-style: normal;
+}
+/* Right scrolling column */
+.whysei-right {
+  flex: 1 0 0;
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+/* Step item row */
+.step-item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+}
+/* Step number column with vertical line */
+.step-number-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 68px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+.step-num {
+  font-family: 'Geist', sans-serif;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1;
+  background-image: linear-gradient(138deg, var(--color-purple) 0%, var(--color-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.step-line {
+  flex: 1;
+  width: 1px;
+  background-color: rgb(222, 222, 222);
+}
+/* Step content */
+.step-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-bottom: 80px;
+}
+.step-content h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  text-transform: capitalize;
+}
+.step-content p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+.step-content .step-img {
+  width: 100%;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.step-content .step-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Quote card at bottom */
+.whysei-quote {
+  position: relative;
+  background: rgba(96, 93, 186, 0.1);
+  border-radius: 16px;
+  padding: 25px 60px;
+  margin-top: 60px;
+  width: 100%;
+  max-width: var(--max-w);
+  text-align: center;
+}
+.whysei-quote .q-open,
+.whysei-quote .q-close {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 700;
+  color: rgb(96, 93, 186);
+  line-height: 0.5;
+}
+.whysei-quote .q-open { text-align: left; }
+.whysei-quote .q-close { text-align: right; }
+.whysei-quote .q-text {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-text-dark);
+  margin: 10px 0;
+}
+/* old step-card styles removed - now using step-item timeline */
+/* ==========================================
+   WHY CHOOSE US SECTION (light bg wrapper 2)
+   ========================================== */
+.section-choose {
+  position: relative;
+  z-index: 1;
+  background: var(--color-bg-light);
+  backdrop-filter: blur(5px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+}
+
+/* ==========================================
+   THE OPPORTUNITY
+   ========================================== */
+.opportunity-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 100px 80px 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.opportunity-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  grid-template-rows: repeat(2, min-content);
+  gap: 10px 20px;
+  width: 90%;
+  height: 372px;
+}
+.opportunity-image {
+  grid-column: span 2;
+  grid-row: span 2;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 371px;
+}
+.opportunity-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.opportunity-right {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(50px, 1fr));
+  gap: 20px;
+}
+.opportunity-stat {
+  padding: 30px;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+  height: 175px;
+}
+.opportunity-stat p {
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 1;
+}
+.opportunity-stat strong { font-weight: 500; }
+.opportunity-stat.purple {
+  grid-column: span 2;
+  background: linear-gradient(130deg, #605dbacc 35%, #3f78e0d9 79%);
+  color: var(--color-white);
+}
+.opportunity-stat.white {
+  grid-column: span 2;
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-faint);
+  color: var(--color-text-dark);
+}
+.opportunity-stat.dark {
+  grid-column: span 4;
+  background: var(--color-text-dark);
+  color: var(--color-white);
+}
+.opportunity-tagline {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-purple);
+  max-width: 900px;
+}
+
+/* ==========================================
+   PROOF PATH / PARTNERSHIP / INVESTORS etc.
+   ========================================== */
+.generic-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 100px 120px 138px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.card-basic {
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-faint);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 .48px 1.06px -.42px #10314d0a, 0 1.83px 4.03px -.83px #10314d0d, 0 8px 17.6px -1.25px #10314d1c;
+}
+.card-basic .card-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-purple);
+}
+.card-basic .card-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.card-basic h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-transform: capitalize;
+}
+.card-basic p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: rgb(115, 115, 115);
+}
+
+/* Partnership section */
+.partnership-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 100px 160px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+}
+.partnership-title-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.partnership-title-row .badge-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.partnership-title-row .heading-col {
+  grid-column: span 2;
+}
+.partnership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  grid-auto-rows: 260px;
+  gap: 20px;
+  width: 100%;
+}
+.partnership-grid .partner-desc {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  padding: 10px 0;
+}
+/* Feature card with icon */
+.feature-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-faint);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 .48px 1.06px -.42px #10314d0a, 0 1.83px 4.03px -.83px #10314d0d, 0 8px 17.6px -1.25px #10314d1c;
+
+}
+.feature-card .fc-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--color-text-dark);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+}
+.feature-card .fc-icon svg {
+  width: 20px;
+  height: 20px;
+}
+.feature-card .fc-icon.blue {
+  background: var(--color-blue);
+}
+.feature-card h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-transform: capitalize;
+}
+.feature-card p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: rgb(115, 115, 115);
+}
+/* Dark feature card (Partnership Paths) */
+.feature-card-dark {
+  background: var(--color-text-dark);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 .48px 1.06px -.42px #10314d0a, 0 1.83px 4.03px -.83px #10314d0d, 0 8px 17.6px -1.25px #10314d1c;
+
+}
+.feature-card-dark h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--color-white);
+  text-transform: capitalize;
+  position: relative;
+  z-index: 2;
+}
+.feature-card-dark .bg-overlay {
+  position: absolute;
+  bottom: -15%;
+  left: -15%;
+  width: 90%;
+  height: 90%;
+  opacity: 0.1;
+}
+.feature-card-dark .bg-overlay img,
+.feature-card-dark .bg-overlay svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: soft-light;
+}
+/* Gradient feature card (Revenue Streams) */
+.feature-card-gradient {
+  background: linear-gradient(314deg, var(--color-purple) 0%, var(--color-blue) 100%);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 .48px 1.06px -.42px #10314d0a, 0 1.83px 4.03px -.83px #10314d0d, 0 8px 17.6px -1.25px #10314d1c;
+
+}
+.feature-card-gradient h3 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--color-white);
+  text-transform: capitalize;
+  position: relative;
+  z-index: 2;
+}
+.feature-card-gradient .bg-overlay {
+  position: absolute;
+  bottom: 3%;
+  left: -10%;
+  width: 75%;
+  height: 70%;
+  opacity: 0.15;
+}
+.feature-card-gradient .bg-overlay img,
+.feature-card-gradient .bg-overlay svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* ==========================================
+   FOR INVESTORS
+   ========================================== */
+.investor-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 100px 160px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+}
+.investor-title-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.investor-title-row .badge-col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.investor-title-row .heading-col {
+  grid-column: span 2;
+}
+.investor-title-row h2 {
+  font-family: var(--font-heading);
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 16px;
+}
+.investor-title-row .body-text {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+.investor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 300px 300px;
+  gap: 20px;
+  width: 100%;
+}
+.investor-grid .inv-image {
+  border-radius: 10px;
+  overflow: hidden;
+}
+.investor-grid .inv-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right center;
+}
+/* Why Now card */
+.inv-whynow {
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-faint);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.inv-whynow h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+}
+.inv-whynow ul {
+  list-style: disc;
+  padding-left: 24px;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: rgb(52, 63, 82);
+}
+.inv-whynow li { margin-bottom: 6px; }
+/* Funding Goal card */
+.inv-funding {
+  background: linear-gradient(130deg, #605dbacc 35%, #3f78e0d9 79%);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--color-white);
+  overflow: hidden;
+}
+.inv-funding .inv-top h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-white);
+}
+.inv-funding .inv-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 30px;
+}
+.inv-funding .stat-block {
+  text-align: right;
+}
+.inv-funding .stat-block .num {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-white);
+}
+.inv-funding .stat-block .sub {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-white);
+  text-align: right;
+}
+/* Act Today card */
+.inv-act {
+  background: var(--color-text-dark);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 .48px 1.06px -.42px #10314d0a, 0 1.83px 4.03px -.83px #10314d0d, 0 8px 17.6px -1.25px #10314d1c;
+}
+.inv-act h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: rgb(231, 230, 250);
+  position: relative;
+  z-index: 2;
+}
+.inv-act .btn-gradient {
+  padding: 10px 30px;
+  align-self: flex-start;
+}
+.inv-act .inv-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+.inv-act .globe-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 209px;
+  height: 195px;
+  opacity: 0.05;
+  z-index: 1;
+  background-image: url(./assets/images/solution-bg.png);
+  background-size: 250px auto;
+  background-repeat: repeat;
+  background-position: left top;
+}
+
+/* Dark card (footer CTA) */
+.dark-card {
+  background: rgba(37, 46, 61, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  padding: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.dark-card .bg-img {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 40%;
+  opacity: 0.8;
+  border-radius: 10px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  mask: linear-gradient(134deg, transparent 32%, #000 112%);
+  -webkit-mask: linear-gradient(134deg, transparent 32%, #000 112%);
+}
+.dark-card .bg-img.left { left: 0; transform: rotate(180deg); }
+.dark-card .bg-img.right { right: 0; }
+.dark-card .bg-img img { width: 100%; height: 100%; object-fit: cover; object-position: center bottom; }
+.dark-card h2 { font-family: var(--font-heading); font-size: 44px; font-weight: 600; color: var(--color-white); position: relative; z-index: 2; }
+.dark-card p { font-family: var(--font-body); font-size: 18px; font-weight: 300; line-height: 1.6; color: var(--color-white); position: relative; z-index: 2; }
+.dark-card .buttons-wrap { display: flex; align-items: center; gap: 15px; position: relative; z-index: 2; flex-wrap: wrap; }
+.dark-card .section-badge { position: relative; z-index: 2; }
+
+
+/* ==========================================
+   MOAT CARDS
+   ========================================== */
+.moat-card {
+  background: linear-gradient(229deg, var(--color-purple) 13%, var(--color-blue) 88%);
+  border-radius: 10px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  overflow: hidden;
+  min-height: 260px;
+  box-shadow: var(--card-shadow);
+}
+.moat-card .moat-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 205px;
+  height: 192px;
+  opacity: 0.05;
+  z-index: 1;
+  overflow: hidden;
+}
+.moat-card .moat-overlay.context-rings {
+  width: 242px;
+  height: 226px;
+  bottom: -52px;
+  left: -40px;
+}
+.moat-card .moat-overlay.timing {
+  width: 205px;
+  height: 192px;
+  background-size: 205px auto;
+  bottom: -19px;
+}
+.moat-card .moat-overlay img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: right bottom;
+}
+.moat-card .moat-overlay.pattern {
+  background-repeat: repeat;
+  background-position: right top;
+  background-size: 256px auto;
+}
+.moat-card h3 {
+  font-family: var(--font-mono);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--color-white);
+  text-transform: capitalize;
+  position: relative;
+  z-index: 2;
+}
+.moat-card p {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-white);
+  position: relative;
+  z-index: 2;
+}
+.moat-tagline {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--color-purple);
+}
+
+/* ==========================================
+   VISION & TEAM SECTION
+   ========================================== */
+.vision-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 100px 160px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 60px;
+}
+.vision-title-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+.vision-title-row .badge-col { display: flex; flex-direction: column; }
+.vision-title-row .heading-col { grid-column: span 2; }
+.vision-title-row h2 {
+  font-family: var(--font-heading);
+  font-size: 44px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+.vision-grid {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+.vision-grid-left {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+}
+.vision-grid-right {
+  width: 530px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+}
+/* Bio card */
+.vision-bio {
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-faint);
+  border-radius: 10px;
+  padding: 30px 20px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.vision-bio .bio-text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+}
+.vision-bio .bio-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.vision-bio .bio-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.vision-bio .bio-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.vision-bio .bio-name {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+}
+.vision-bio .bio-role {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+}
+.vision-bio .bio-company {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+}
+/* Vision card (dark gray) */
+.vision-card-dark {
+  background: rgba(37, 46, 61, 0.85);
+  border-radius: 10px;
+  padding: 20px 20px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 25px;
+  overflow: hidden;
+}
+.vision-card-dark h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-white);
+}
+.vision-card-dark p {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-white);
+}
+/* Team image */
+.vision-image {
+  grid-column: span 2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.vision-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+/* Statement white card */
+.vision-stmt-white {
+  background: var(--color-white);
+  border: 1px solid var(--color-purple-faint);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.vision-stmt-white p {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--color-text-dark);
+}
+/* Statement dark card */
+.vision-stmt-dark {
+  background: var(--color-text-dark);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.vision-stmt-dark p {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-white);
+}
+
+/* ==========================================
+   LOGO TICKER
+   ========================================== */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+  mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+}
+.ticker-wrap.row1 { height: 130px; }
+.ticker-wrap.row2 { height: 130px; }
+.ticker-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  will-change: transform;
+  height: 100%;
+  align-items: center;
+}
+.ticker-track.left { animation: tickerLeft 60s linear infinite; }
+.ticker-track.right { animation: tickerRight 60s linear infinite; }
+@keyframes tickerLeft { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+@keyframes tickerRight { 0%{transform:translateX(-50%)} 100%{transform:translateX(0)} }
+.ticker-item {
+  flex-shrink: 0;
+  width: 320px;
+  height: 103px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.ticker-item img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  filter: grayscale(1) contrast(1.5) brightness(0.5);
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+}
+
+/* ==========================================
+   ROADMAP
+   ========================================== */
+.roadmap-section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 126px var(--pad) 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.roadmap-timeline {
+  width: 100%;
+  max-width: 1100px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 30px 1fr;
+}
+/* Left column: single sticky year */
+.rm-year-col {
+  position: relative;
+}
+.rm-year-sticky {
+  position: sticky;
+  top: 50vh;
+  transform: translateY(-50%);
+  text-align: right;
+  padding-right: 40px;
+  height: 50px;
+}
+.rm-year-sticky span {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-weight: 600;
+  background: linear-gradient(115deg, var(--color-purple) 0%, var(--color-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  right: 40px;
+  opacity: 0;
+}
+.rm-year-sticky span.active {
+  opacity: 1;
+}
+/* Center line */
+.rm-line-col {
+  position: relative;
+}
+.rm-line-col::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--color-purple-faint);
+  transform: translateX(-50%);
+}
+/* Right column: entries */
+.rm-entries-col {
+  display: flex;
+  flex-direction: column;
+}
+.rm-entry {
+  padding-left: 40px;
+  padding-bottom: 80px;
+  position: relative;
+  min-height: 380px;
+}
+.rm-entry::before {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 6px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #b0b0b0;
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+.rm-entry.active::before {
+  background: var(--color-text-dark);
+}
+.rm-entry h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  color: var(--color-text-dark);
+  margin-bottom: 20px;
+}
+.rm-entry img {
+  width: 100%;
+  max-width: 100%;
+  height: 320px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.footer-section {
+  background: var(--color-white);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.footer-container {
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 50px var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer-top {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  width: 100%;
+}
+.footer-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer-logo img { height: 50px; width: 76px; object-fit: contain; }
+.footer-nav { display: flex; gap: 20px; }
+.footer-nav a {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--color-purple); }
+.scroll-top-btn {
+  flex: none;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 1px solid rgba(107, 114, 128, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  background: transparent;
+  text-decoration: none;
+  color: rgba(107, 114, 128, 0.6);
+}
+.scroll-top-btn:hover { background: var(--color-bg-light); }
+.scroll-top-btn svg { width: 24px; height: 24px; }
+.footer-divider {
+  width: 100%; height: 1px;
+  background: #dedede;
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.footer-bottom p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-gray-500);
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     VIDEO BACKGROUND
+     ========================================== -->
+<div class="video-bg">
+  <video src="./assets/video/hero-bg.mp4" loop muted playsinline autoplay poster="./assets/video/hero-poster.png"></video>
+  <div class="overlay"></div>
+</div>
+
+<!-- ==========================================
+     HERO SECTION
+     ========================================== -->
+<section class="hero" id="hero">
+  <div class="hero-container">
+    <h1 class="sr-only">Cognitive Intelligence for Capital Markets</h1>
+    <div class="hero-content stagger-group">
+      <div class="hero-text-wrap">
+        <p class="hero-headline blur-reveal">A Morning in the Markets</p>
+        <div class="hero-subtitle blur-reveal">
+          <p>6:45 a.m. – Singapore.<br>A capital-markets professional opens the dashboard.<br>Overnight: new MAS circular, shifting ESG indices, three conflicting forecasts.<br>Hundreds of data points. All visible – none connected fast enough to act.</p>
+        </div>
+        <p class="hero-tagline blur-reveal">That's the gap SEI was built to close.</p>
+      </div>
+      <div class="hero-buttons blur-reveal">
+        <a href="./contact" class="btn-gradient">Get Investor Deck</a>
+        <a href="./assets/docs/partner-deck.pdf" target="_blank" download class="btn-glass">Explore Partnership</a>
+        <a href="./assets/docs/investor-deck.pdf" target="_blank" download class="btn-outline"><img src="./assets/images/integration-icon.png" alt="">Read: "The Bridge to Cognitive Capital"</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     FEATURE SECTION (light BG: What SEI Is → Why SEI Wins)
+     ========================================== -->
+<section class="section-feature" id="feature">
+  <!-- Decorative light bars -->
+  <div class="lights-overlay">
+    <div class="light-bar"></div>
+    <div class="light-bar"></div>
+    <div class="light-bar"></div>
+    <div class="light-bar"></div>
+    <div class="light-bar"></div>
+  </div>
+
+  <!-- WHAT SEI IS -->
+  <div class="what-sei-is stagger-group">
+    <div class="section-title-centered">
+      <span class="section-badge gradient-text blur-reveal">WHAT SEI IS</span>
+      <h2 class="blur-reveal">From Data to <span class="text-purple">Meaning</span> –<br>The Future of Capital Intelligence</h2>
+      <p class="section-desc blur-reveal">SEI (Smart Export Intelligence) is a cognitive intelligence layer for capital markets. It connects data, regulation, and sentiment – helping financial institutions sense meaning before numbers move.</p>
+      <p class="section-desc blur-reveal">This understanding turns foresight into performance – enabling smarter allocation, faster adaptation, and sustained growth.</p>
+    </div>
+  </div>
+
+  <!-- THE CHALLENGE -->
+  <div class="subsection stagger-group">
+    <div class="subsection-title">
+      <span class="section-badge gradient-text blur-reveal">THE CHALLENGE</span>
+      <h2 class="blur-reveal">Too Much Data.<br>Too Little Understanding.</h2>
+    </div>
+    <div class="two-col-grid">
+      <div class="two-col-text blur-reveal">
+        <p>Financial institutions face an information paradox:</p>
+        <ul>
+          <li>Perfect visibility, limited foresight.</li>
+          <li>Data overload, compliance fatigue.</li>
+          <li>Regulation and ESG updates outpacing interpretation.</li>
+        </ul>
+        <div class="italic-summary">
+          <p>It's not a data problem.</p>
+          <p class="text-purple">It's a meaning problem.</p>
+        </div>
+      </div>
+      <div class="two-col-image blur-reveal">
+        <img src="./assets/images/shift-img.jpeg" alt="Data Challenge" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SHIFT -->
+  <div class="subsection shift stagger-group">
+    <div class="subsection-title">
+      <span class="section-badge gradient-text blur-reveal">THE SHIFT</span>
+      <h2 class="blur-reveal">From Artificial to<br>Understanding Intelligence</h2>
+    </div>
+    <div class="two-col-grid">
+      <div class="two-col-image blur-reveal">
+        <img src="./assets/images/investor-section-img.jpg" alt="Understanding Intelligence" loading="lazy">
+      </div>
+      <div class="two-col-text blur-reveal">
+        <p>Traditional AI predicts.<br>Markets move on meaning.</p>
+        <p>SEI introduces the next layer of intelligence – one that understands context: how policy, culture, and behavior interact to shape financial systems.</p>
+        <div class="italic-summary">
+          <p>This is not automation.</p>
+          <p class="text-purple">It's comprehension.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SOLUTION -->
+  <div class="solution-section stagger-group">
+    <div class="solution-header">
+      <span class="section-badge gradient-text blur-reveal">THE SOLUTION</span>
+      <h2 class="blur-reveal">Building the Cognitive Intelligence Layer for Finance</h2>
+    </div>
+    <div class="solution-body">
+      <div class="solution-text blur-reveal">
+        <p>SEI transforms existing financial dashboards into living systems that think with you.</p>
+        <p>When MAS tone shifts, ESG sentiment rises in Jakarta, or capital flows change overnight – SEI reads signals and connects what matters.</p>
+        <p class="crf-label">The Capital Resonance Framework (CRF) links:</p>
+      </div>
+      <!-- Signal Intelligence -->
+      <div class="intel-card blur-reveal">
+        <div class="signal-blur-1"></div>
+        <div class="signal-blur-2"></div>
+        <div class="signal-blur-3"></div>
+        <div class="card-illustration">
+          <div class="waveform-wrap" id="waveform-wrap">
+            <div class="waveform-bars ghost" id="ghost-bars"></div>
+            <div class="waveform-bars active" id="active-bars"></div>
+            <div class="waveform-needle" id="waveform-needle">
+              <div class="waveform-diamond"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-text-wrap">
+          <h3>Signal Intelligence</h3>
+          <p>Early detection of market, policy, and sentiment shifts across ASEAN and global sources.</p>
+        </div>
+      </div>
+      <!-- Context Intelligence -->
+      <div class="intel-card font-geist blur-reveal">
+        <div class="context-blur-1"></div>
+        <div class="context-blur-2"></div>
+        <div class="context-blur-3"></div>
+        <div class="context-chat">
+          <div style="width:100%;min-height:37px"></div>
+        </div>
+        <div class="context-orb-wrap"><div class="context-orb"></div></div>
+        <div class="context-icon-wrap">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="25" cy="26" r="16" stroke="#605dba" stroke-width="2.5" fill="none"/>
+            <circle cx="39" cy="36" r="13" stroke="#605dba" stroke-width="2.5" fill="none"/>
+            <defs>
+              <clipPath id="cL2"><circle cx="25" cy="26" r="16"/></clipPath>
+              <clipPath id="cR2"><circle cx="39" cy="36" r="13"/></clipPath>
+            </defs>
+            <g clip-path="url(#cL2)">
+              <g clip-path="url(#cR2)">
+                <line x1="28" y1="46" x2="36" y2="22" stroke="#605dba" stroke-width="2.2"/>
+                <line x1="32" y1="47" x2="40" y2="23" stroke="#605dba" stroke-width="2.2"/>
+                <line x1="36" y1="48" x2="44" y2="24" stroke="#605dba" stroke-width="2.2"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <div class="scan-frame">
+          <div class="scan-corner-tl"></div>
+          <div class="scan-corner-tr"></div>
+          <div class="scan-corner-bl"></div>
+          <div class="scan-corner-br"></div>
+        </div>
+        <div class="card-text-wrap">
+          <h3>Context Intelligence</h3>
+          <p>Bridging quantitative data with political and cultural meaning.</p>
+        </div>
+      </div>
+      <!-- Grid row 2: empty spacer + Narrative -->
+      <div class="grid-spacer"></div>
+      <!-- Narrative Intelligence -->
+      <div class="intel-card font-geist blur-reveal">
+        <div class="narrative-blur-1"></div>
+        <div class="narrative-blur-2"></div>
+        <div class="card-illustration">
+          <div class="narrative-scan">
+            <div class="narrative-doc">
+              <div class="paper-overlay"></div>
+              <div class="doc-lines-wrap">
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+                <div class="doc-line"></div>
+              </div>
+              <div class="doc-gradient">
+                <div class="grad-line"></div>
+                <div class="grad-fade"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-text-wrap">
+          <h3>Narrative Intelligence</h3>
+          <p>Translating insights into coherent investor communication and decisive action.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE RESULT -->
+  <div class="result-section stagger-group">
+    <div class="section-title-centered">
+      <span class="section-badge gradient-text blur-reveal">THE RESULT</span>
+      <h2 class="blur-reveal">From Compliance to Confidence</h2>
+    </div>
+    <div class="comparison-headers blur-reveal">
+      <span class="col-before">Before</span>
+      <span class="col-after">With SEI</span>
+    </div>
+    <div class="comparison-content blur-reveal">
+      <div class="comparison-row">
+        <div class="comparison-cell before">Manual Synthesis</div>
+        <div class="comparison-cell after">Real-time Signal Fusion</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell before">Reactive Reporting</div>
+        <div class="comparison-cell after">Predictive Foresight</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell before">Static Compliance</div>
+        <div class="comparison-cell after">Dynamic Interpretation</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell before">Data-driven</div>
+        <div class="comparison-cell after">Context-driven</div>
+      </div>
+      <div class="comparison-row">
+        <div class="comparison-cell before">Fragmented Communication</div>
+        <div class="comparison-cell after">Coherent Storytelling</div>
+      </div>
+    </div>
+    <p class="result-tagline blur-reveal">SEI turns complexity into clarity – and clarity into capital advantage.</p>
+  </div>
+
+  <!-- WHY SEI WINS -->
+  <div class="whysei-section stagger-group">
+    <!-- Left sticky column -->
+    <div class="whysei-left">
+      <span class="section-badge gradient-text blur-reveal">WHY SEI WINS WHERE BIG TECH CAN'T</span>
+      <h2 class="char-reveal blur-reveal">Big Tech Builds Intelligence.<br>SEI Builds <span class="text-purple">Understanding</span>.</h2>
+      <p class="body-text blur-reveal">Every investor asks: Can a small company compete with Google or OpenAI?</p>
+      <p class="body-text blur-reveal">The answer is <strong>yes</strong> – because we don't try to be them.</p>
+    </div>
+    <!-- Right scrolling column -->
+    <div class="whysei-right">
+      <div class="step-item blur-reveal">
+        <div class="step-number-col">
+          <div class="step-num">01</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>The Last-Mile Problem</h3>
+          <p>Big Tech trains general models but can't deploy them inside regulated finance.</p>
+          <div class="step-img"><img src="./assets/images/signal-card-img.jpeg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="step-item blur-reveal">
+        <div class="step-number-col">
+          <div class="step-num">02</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>Trust &amp; Sovereignty</h3>
+          <p>Banks keep control. SEI runs on sovereign, MAS-ready infrastructure.</p>
+          <div class="step-img"><img src="./assets/images/challenge-img.jpeg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="step-item blur-reveal">
+        <div class="step-number-col">
+          <div class="step-num">03</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>Specialization vs. Scale</h3>
+          <p>Big Tech chases universality. SEI goes deep in one vertical: capital markets.</p>
+          <div class="step-img"><img src="./assets/images/cognitive-card-img.jpeg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="step-item blur-reveal">
+        <div class="step-number-col">
+          <div class="step-num">04</div>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-content">
+          <h3>Context as Moat</h3>
+          <p>Our IP links data with regulation, politics, and culture – something compute power can't copy.</p>
+          <div class="step-img"><img src="./assets/images/vision-kai-photo.jpeg" alt="" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote card -->
+  <div class="whysei-quote blur-reveal" style="max-width:1000px;margin:0 auto 120px;">
+    <div class="q-open">&ldquo;</div>
+    <div class="q-text">We don't outspend Big Tech – we out-understand them.</div>
+    <div class="q-close">&rdquo;</div>
+  </div>
+
+</section>
+
+<!-- ==========================================
+     WHY CHOOSE US SECTION (Opportunity → Powered By)
+     ========================================== -->
+<section class="section-choose" id="why-choose-us">
+
+  <!-- THE OPPORTUNITY -->
+  <div class="opportunity-section stagger-group">
+    <div class="section-title-centered">
+      <span class="section-badge gradient-text blur-reveal">THE OPPORTUNITY</span>
+      <h2 class="blur-reveal">A $15B Cognitive Opportunity in ASEAN &amp; EU Markets</h2>
+    </div>
+    <p class="blur-reveal" style="font-family:var(--font-body);font-size:20px;font-weight:300;line-height:1.6;text-align:center;color:var(--color-text-dark);max-width:900px">The shift toward cognitive finance has begun – but no one owns the bridge between AI and real financial context.</p>
+    <div class="opportunity-grid">
+      <div class="opportunity-image blur-reveal">
+        <img src="./assets/images/arrow-icon.jpeg" alt="" loading="lazy">
+      </div>
+      <div class="opportunity-right">
+        <div class="opportunity-stat purple blur-reveal"><p><strong>Regulators</strong> move faster than systems.</p></div>
+        <div class="opportunity-stat white blur-reveal"><p><strong>ESG</strong> disclosures multiply daily.</p></div>
+        <div class="opportunity-stat dark blur-reveal"><p><strong>Investors</strong> demand narrative transparency, not just data.</p></div>
+      </div>
+    </div>
+    <p class="opportunity-tagline blur-reveal">SEI occupies the open space where meaning drives markets –<br>the Capital Intelligence Layer.</p>
+  </div>
+
+  <!-- THE PROOF PATH -->
+  <div class="generic-section stagger-group">
+    <div class="section-title-centered">
+      <span class="section-badge gradient-text blur-reveal">THE PROOF PATH</span>
+      <h2 class="blur-reveal">From Concept to Regulatory Readiness</h2>
+      <p class="section-desc blur-reveal">SEI is preparing to apply for the MAS FinTech Regulatory Sandbox to co-develop the first Capital Resonance use case with regional banking partners.</p>
+    </div>
+    <div class="cards-3">
+      <div class="card-basic blur-reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <h3>The Objective</h3><p>Interpret MAS ESG and Green Finance updates in real time - turning compliance into foresight.</p>
+      </div>
+      <div class="card-basic blur-reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <h3>Target Scope</h3><p>Singapore · Malaysia · Hong Kong</p>
+      </div>
+      <div class="card-basic blur-reveal">
+        <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V10l4-6 4 4 4-4 4 6v10"/></svg></div>
+        <h3>Key Outputs</h3><p>Regulatory Tone Index · Sentiment Map · Capital Readiness Score</p>
+      </div>
+    </div>
+    <p class="blur-reveal" style="font-family:var(--font-body);font-size:18px;font-weight:400;line-height:1.6;color:var(--color-text-dark);text-align:center;max-width:900px">MAS Sandbox admission is under preparation and represents Phase 1 of SEI's roadmap.</p>
+  </div>
+
+  <!-- PARTNERSHIP MODEL -->
+  <div class="partnership-section stagger-group">
+    <!-- Title row: badge left, heading right -->
+    <div class="partnership-title-row">
+      <div class="badge-col">
+        <span class="section-badge gradient-text blur-reveal">PARTNERSHIP MODEL</span>
+      </div>
+      <div class="heading-col">
+        <h2 class="blur-reveal" style="font-family:var(--font-heading);font-size:44px;font-weight:600;color:var(--color-text-dark)">Collaborative Growth –<br>Build, License, Scale</h2>
+      </div>
+    </div>
+    <!-- Features grid -->
+    <div class="partnership-grid">
+      <!-- Row 1 -->
+      <div class="partner-desc blur-reveal">
+        <p>SEI is designed for collaboration.</p>
+        <br>
+        <p>Banks, regulators, and data partners are co-creators in the system.</p>
+      </div>
+      <div class="feature-card blur-reveal">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3c0 1.1.6 2 1.5 2.5L9 12H6l-3 7h18l-3-7h-3l-1.5-4.5c.9-.5 1.5-1.4 1.5-2.5a3 3 0 0 0-3-3z"/></svg></div>
+        <h3>Joint Development</h3>
+        <p>Co-create within regulatory frameworks.</p>
+      </div>
+      <div class="feature-card blur-reveal">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <h3>Licensing &amp; Integration</h3>
+        <p>Embed SEI modules or APIs.</p>
+      </div>
+      <!-- Row 2 -->
+      <div class="feature-card-dark blur-reveal">
+        <div class="bg-overlay"><img src="./assets/images/moat-icon-brain.png" alt="" loading="lazy"></div>
+        <h3>Partnership Paths</h3>
+      </div>
+      <div class="feature-card blur-reveal">
+        <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+        <h3>Strategic Investment</h3>
+        <p>Participate in SEI Holding for IP value creation.</p>
+      </div>
+      <div></div>
+      <!-- Row 3 -->
+      <div class="feature-card-gradient blur-reveal">
+        <h3>Revenue Streams</h3>
+        <div class="bg-overlay"><img src="./assets/images/moat-icon-globe.png" alt="" loading="lazy"></div>
+      </div>
+      <div class="feature-card blur-reveal">
+        <div class="fc-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></div>
+        <h3>Platform Licensing</h3>
+      </div>
+      <div class="feature-card blur-reveal">
+        <div class="fc-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></div>
+        <h3>ESG Modules</h3>
+      </div>
+      <!-- Row 4 -->
+      <div></div>
+      <div class="feature-card blur-reveal">
+        <div class="fc-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h20"/><path d="M5 20V10l4-6 4 4 4-4 4 6v10"/></svg></div>
+        <h3>Regulatory Analytics</h3>
+      </div>
+      <div class="feature-card blur-reveal">
+        <div class="fc-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="11" x2="13" y2="11"/></svg></div>
+        <h3>Narrative Intelligence Services.</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOR INVESTORS -->
+  <div class="investor-section stagger-group">
+    <!-- Title row -->
+    <div class="investor-title-row">
+      <div class="badge-col">
+        <span class="section-badge blur-reveal"><span class="gradient-text">FOR INVESTORS</span></span>
+      </div>
+      <div class="heading-col">
+        <h2 class="blur-reveal">Invest in Cognitive Capital</h2>
+        <div class="body-text blur-reveal">
+          <p>SEI is not another AI product.</p>
+          <p>It's the cognitive backbone of future capital markets –</p>
+          <p>a system that learns how finance, culture, and policy interact.</p>
+        </div>
+      </div>
+    </div>
+    <!-- 2x2 Grid -->
+    <div class="investor-grid">
+      <!-- Top-left: Image -->
+      <div class="inv-image blur-reveal">
+        <img src="./assets/images/waveform-card-img.png" alt="" loading="lazy">
+      </div>
+      <!-- Top-right: Why Now -->
+      <div class="inv-whynow blur-reveal">
+        <h3>Why Now</h3>
+        <ul>
+          <li>Seed funds enable MAS Sandbox readiness &amp; pilot validation.</li>
+          <li>Builds the regulatory &amp; ESG context layer.</li>
+          <li>Establishes trust and compliance advantage.</li>
+          <li>Prepares Series A expansion post-validation.</li>
+        </ul>
+      </div>
+      <!-- Bottom-left: Funding Goal -->
+      <div class="inv-funding blur-reveal">
+        <div class="inv-top"><h3>Funding Goal</h3></div>
+        <div class="inv-bottom">
+          <div class="stat-block"><span class="num" style="font-size:50px">2.5M</span><br><span class="sub">USD</span></div>
+          <div class="stat-block"><span class="num" style="font-size:50px">18</span><br><span class="sub">months runway</span></div>
+          <div class="stat-block"><span class="num" style="font-size:30px">Proof milestone</span><br><span class="sub">Regulatory admission +<br>pilot execution.</span></div>
+        </div>
+      </div>
+      <!-- Bottom-right: Act Today -->
+      <div class="inv-act blur-reveal">
+        <h3>Act Today</h3>
+        <div class="inv-buttons">
+          <a href="./contact" class="btn-gradient">Request Full Investor Deck</a>
+          <a href="./assets/docs/investor-deck.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:5px;font-family:var(--font-body);font-size:18px;font-weight:500;color:rgb(231,230,250);border-bottom:1px solid rgb(231,230,250);padding:10px 0;text-decoration:none;position:relative;z-index:2;width:fit-content">
+            Read: "The Bridge to Cognitive Capital"
+            <img src="./assets/images/integration-icon.png" alt="" style="width:20px;height:20px">
+          </a>
+        </div>
+        <div class="globe-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COGNITIVE MOAT -->
+  <div class="generic-section stagger-group" style="padding-left:240px;padding-right:240px">
+    <div class="section-title-centered">
+      <span class="section-badge gradient-text blur-reveal">THE COGNITIVE MOAT</span>
+      <h2 class="blur-reveal">Our Edge: Trust × Context × Timing</h2>
+      <p class="section-desc blur-reveal" style="font-weight:400">Technology can be copied.<br>Trust cannot.</p>
+      <p class="blur-reveal" style="font-family:var(--font-body);font-size:20px;font-weight:400;line-height:1.6;text-align:center;color:var(--color-text-dark)">SEI's defensibility grows through:</p>
+    </div>
+    <div class="cards-3">
+      <div class="moat-card blur-reveal">
+        <div class="moat-overlay pattern" style="background-image:url(./assets/images/moat-decorative-1.png)"></div>
+        <h3>Trust</h3>
+        <p>Regulation-first, auditable systems</p>
+      </div>
+      <div class="moat-card blur-reveal">
+        <div class="moat-overlay context-rings"><img src="./assets/images/moat-icon-network.png" alt="" loading="lazy"></div>
+        <h3>Context</h3>
+        <p>Deep understanding of policy, culture, and capital</p>
+      </div>
+      <div class="moat-card blur-reveal">
+        <div class="moat-overlay pattern timing" style="background-image:url(./assets/images/moat-decorative-2.png)"></div>
+        <h3>Timing</h3>
+        <p>Early market entry before Big Tech verticalizes finance.</p>
+      </div>
+    </div>
+    <p class="moat-tagline blur-reveal">Together, these create a living moat – the more SEI learns, the stronger it becomes.</p>
+  </div>
+
+  <!-- VISION & TEAM -->
+  <div class="vision-section stagger-group">
+    <!-- Title row -->
+    <div class="vision-title-row">
+      <div class="badge-col">
+        <span class="section-badge blur-reveal"><span class="gradient-text">VISION &amp; TEAM</span></span>
+      </div>
+      <div class="heading-col">
+        <h2 class="blur-reveal">The Architects of Cognitive Finance</h2>
+      </div>
+    </div>
+    <!-- Grid -->
+    <div class="vision-grid">
+      <!-- Left column: Bio + Vision -->
+      <div class="vision-grid-left">
+        <div class="vision-bio blur-reveal">
+          <p class="bio-text">Founded in Singapore by Kai Thomas – Serial Entrepreneur (Exec. MBA) with 20 years of experience in innovation consulting and strategic design for financial institutions.</p>
+          <div class="bio-author">
+            <div class="bio-avatar"><img src="./assets/images/kai-thomas.jpeg" alt="Kai Thomas" loading="lazy"></div>
+            <div>
+              <div class="bio-name">Kai Thomas</div>
+              <div class="bio-role">Founder &amp; CEO</div>
+              <div class="bio-company">SEI</div>
+            </div>
+          </div>
+        </div>
+        <div class="vision-card-dark blur-reveal">
+          <h3>Vision</h3>
+          <p>To make financial systems not only automated – but self-understanding.</p>
+        </div>
+      </div>
+      <!-- Right column: Image + 2 statement cards -->
+      <div class="vision-grid-right">
+        <div class="vision-image blur-reveal">
+          <img src="./assets/images/semantic-card-img.jpeg" alt="" loading="lazy">
+        </div>
+        <div class="vision-stmt-white blur-reveal">
+          <p>We don't build software for banks.</p>
+        </div>
+        <div class="vision-stmt-dark blur-reveal">
+          <p>We build understanding for their future.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POWERED BY SEI x METAVERS -->
+  <div class="generic-section stagger-group" style="padding-bottom:69px">
+    <div class="section-title-centered">
+      <span class="section-badge gradient-text blur-reveal">POWERED BY SEI x METAVERS</span>
+      <h2 class="blur-reveal">Built in Cooperation with metavers –<br>The AGI-Ready Brand &amp; Innovation Studio</h2>
+      <p class="section-desc blur-reveal">metavers is a next-generation innovation studio bridging artificial and human intelligence. With over 20 years of experience in strategy, cognitive systems, and cultural transformation, metavers designs organizations that think – and adapt.</p>
+      <p class="section-desc blur-reveal">Headquartered in Munich and expanding to Singapore, metavers develops SEI as part of its AGI-readiness framework for financial systems.</p>
+      <p class="moat-tagline blur-reveal">We don't predict the future. We design its intelligence.</p>
+    </div>
+  </div>
+
+  <!-- LOGO TICKER -->
+  <div style="width:100%;padding:8px 0 160px;position:relative;z-index:1">
+    <div class="ticker-wrap row1">
+      <div class="ticker-track left">
+        <div class="ticker-item"><img src="./assets/logos/adidas.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/airbus.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/allianz.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/audi.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bentley.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bmw-bank.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bmw.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bosch.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/ces.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/cortal-consors.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/ferrari.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/hp.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/infineon.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/jlr.png" alt="" loading="lazy"></div>
+        <!-- duplicate set for seamless loop -->
+        <div class="ticker-item"><img src="./assets/logos/adidas.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/airbus.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/allianz.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/audi.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bentley.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bmw-bank.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bmw.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/bosch.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/ces.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/cortal-consors.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/ferrari.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/hp.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/infineon.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/jlr.png" alt="" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="ticker-wrap row2" style="margin-top:10px">
+      <div class="ticker-track right">
+        <div class="ticker-item"><img src="./assets/logos/lamborghini.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/lexus.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/lufthansa.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/mercedes.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/microsoft.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/nvidia.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/porsche.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/rolls-royce.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/siemens.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/toyota.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/vw-bank.png" alt="" loading="lazy"></div>
+        <!-- duplicate set -->
+        <div class="ticker-item"><img src="./assets/logos/lamborghini.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/lexus.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/lufthansa.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/mercedes.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/microsoft.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/nvidia.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/porsche.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/rolls-royce.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/siemens.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/toyota.png" alt="" loading="lazy"></div>
+        <div class="ticker-item"><img src="./assets/logos/vw-bank.png" alt="" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ==========================================
+     ROADMAP SECTION
+     ========================================== -->
+<section style="background:var(--color-bg-light);width:100%;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1">
+  <div class="roadmap-section stagger-group">
+    <div class="section-title-centered">
+      <span class="section-badge gradient-text blur-reveal">ROADMAP</span>
+      <h2 class="blur-reveal">From Readiness to Resonance</h2>
+    </div>
+    <div class="roadmap-timeline">
+      <!-- Left: single sticky year -->
+      <div class="rm-year-col">
+        <div class="rm-year-sticky">
+          <span class="active" data-year="2025">2025</span>
+          <span data-year="2026">2026</span>
+          <span data-year="2027">2027</span>
+          <span data-year="2028">2028</span>
+        </div>
+      </div>
+      <!-- Center: vertical line -->
+      <div class="rm-line-col"></div>
+      <!-- Right: entries -->
+      <div class="rm-entries-col">
+        <div class="rm-entry active blur-reveal" data-year="2025">
+          <h3>MAS Sandbox application &amp; partner onboarding (Singapore entity setup)</h3>
+          <img src="./assets/images/roadmap-2025.png" alt="" loading="lazy">
+        </div>
+        <div class="rm-entry blur-reveal" data-year="2026">
+          <h3>Pilot execution upon Sandbox approval</h3>
+          <img src="./assets/images/roadmap-2026.png" alt="" loading="lazy">
+        </div>
+        <div class="rm-entry blur-reveal" data-year="2027">
+          <h3>ESG &amp; Green Finance modules (TNFD / CSRD aligned)</h3>
+          <img src="./assets/images/roadmap-2027.jpeg" alt="" loading="lazy">
+        </div>
+        <div class="rm-entry blur-reveal" data-year="2028">
+          <h3>EU expansion and licensing network at scale</h3>
+          <img src="./assets/images/roadmap-2028.jpeg" alt="" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     CLOSING CTA SECTION
+     ========================================== -->
+<section style="background:transparent;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);width:100%;display:flex;justify-content:center;padding:100px 60px;position:relative;z-index:1">
+  <div class="dark-card" style="max-width:var(--max-w)">
+    <div class="bg-img left"><img src="./assets/images/dark-card-bg.jpg" alt="" loading="lazy"></div>
+    <div class="bg-img right"><img src="./assets/images/dark-card-bg.jpg" alt="" loading="lazy"></div>
+    <span class="section-badge blur-reveal"><span class="gradient-text">CLOSING WORDS</span></span>
+    <h2 class="blur-reveal">We Don't Automate Finance.<br>We Evolve Its Intelligence.</h2>
+    <p class="blur-reveal">The next decade of finance will belong to those who understand meaning before markets move.</p>
+    <div class="buttons-wrap">
+      <a href="./contact" class="btn-gradient blur-reveal">Request Investor Deck</a>
+      <a href="./assets/docs/partner-deck.pdf" target="_blank" download class="btn-glass blur-reveal">Partner with SEI Singapore</a>
+    </div>
+    <p class="blur-reveal" style="font-family:var(--font-heading);font-size:20px;font-style:italic;font-weight:600;line-height:1.6;text-align:center;color:rgb(63,120,224);opacity:1">&#x201C;Be part of the shift from data to meaning.&#x201D;</p>
+  </div>
+</section>
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+<footer class="footer-section">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-left">
+        <a href="./" class="footer-logo">
+          <img src="./assets/icons/sei-logo.png" alt="SEI Finance">
+        </a>
+        <div class="footer-nav">
+          <a href="./">Home</a>
+          <a href="./contact">Contact</a>
+          <a href="./legal#imprint">Imprint</a>
+          <a href="./legal#privacy">Privacy Policy</a>
+        </div>
+      </div>
+      <a href="#hero" class="scroll-top-btn" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>© Copyright 2025. All Rights Reserved by SEI</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     JAVASCRIPT: Intersection Observer Animations
+     ========================================== -->
+<script>
+// Signal Intelligence: Waveform with animated needle
+(function() {
+  // Exact bar heights from Framer CSS (px)
+  const H = [19,13,9,4,22,22,18,13,9,5,22,40,18,26,22,13,9,13,22,18,13,9,5,18,26,22,18];
+  const ghost = document.getElementById('ghost-bars');
+  const active = document.getElementById('active-bars');
+  const needle = document.getElementById('waveform-needle');
+  if (!ghost || !active || !needle) return;
+  H.forEach(h => {
+    const g = document.createElement('div'); g.className = 'bar'; g.style.height = h + 'px';
+    const a = document.createElement('div'); a.className = 'bar'; a.style.height = h + 'px';
+    ghost.appendChild(g); active.appendChild(a);
+  });
+  // Animate needle left→right, loop every 8s
+  let start = null;
+  function tick(ts) {
+    if (!start) start = ts;
+    const p = ((ts - start) % 8000) / 8000; // 0→1
+    needle.style.left = (p * 99.5) + '%';
+    active.style.clipPath = 'inset(0 ' + (100 - p * 100) + '% 0 0)';
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+})();
+
+// Char reveal: wrap text in individual spans
+document.querySelectorAll('.char-reveal').forEach(el => {
+  // Always use TreeWalker to preserve child elements (br, span, etc.)
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+  textNodes.forEach(node => {
+    if (node.textContent.trim()) {
+      const frag = document.createDocumentFragment();
+      // Split into words first, then chars within each word
+      node.textContent.split(/(\s+)/).forEach(part => {
+        if (/^\s+$/.test(part)) {
+          frag.appendChild(document.createTextNode(part));
+        } else {
+          // Wrap each word in a nowrap span
+          const wordWrap = document.createElement('span');
+          wordWrap.setAttribute('data-word', '');
+          part.split('').forEach(ch => {
+            const s = document.createElement('span');
+            s.textContent = ch;
+            wordWrap.appendChild(s);
+          });
+          frag.appendChild(wordWrap);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    }
+  });
+  // Post-process: merge standalone punctuation [data-word] with previous word
+  el.querySelectorAll('[data-word]').forEach(w => {
+    const text = w.textContent;
+    if (/^[.,!?:;–—]+$/.test(text)) {
+      const prev = w.previousElementSibling;
+      if (prev && prev.hasAttribute && prev.hasAttribute('data-word')) {
+        while (w.firstChild) prev.appendChild(w.firstChild);
+        w.remove();
+      }
+    }
+  });
+});
+
+// Intersection Observer for reveal animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      // Stagger char-reveal spans
+      if (entry.target.classList.contains('char-reveal')) {
+        const spans = entry.target.querySelectorAll('[data-word] > span');
+        spans.forEach((s, i) => {
+          s.style.transitionDelay = `${i * 0.03}s`;
+        });
+      }
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.blur-reveal').forEach(el => observer.observe(el));
+
+// Roadmap year switcher
+const rmEntries = document.querySelectorAll('.rm-entry');
+const rmYears = document.querySelectorAll('.rm-year-sticky span');
+if (rmEntries.length && rmYears.length) {
+  const yearObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const year = entry.target.dataset.year;
+        // Update year display
+        rmYears.forEach(y => y.classList.toggle('active', y.dataset.year === year));
+        // Update dot
+        rmEntries.forEach(e => e.classList.toggle('active', e.dataset.year === year));
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
+  rmEntries.forEach(entry => yearObserver.observe(entry));
+}
+</script>
+
+</body>
+</html>

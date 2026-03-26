@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1200">
+<title>Imprint, Terms & Privacy – SEI Finance</title>
+<meta name="description" content="Imprint, Terms and Conditions, and Privacy Policy for SEI Finance by metavers GmbH.">
+<link rel="icon" href="./assets/icons/favicon-light.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="./assets/icons/favicon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="./assets/icons/favicon-light.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;500&family=Geist:wght@300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg-light: #f7f7f7;
+  --color-white: #fff;
+  --color-text-dark: rgb(37, 46, 61);
+  --color-purple: rgb(96, 93, 186);
+  --color-blue: rgb(63, 120, 224);
+  --color-gray-border: #e5e7eb;
+  --color-gray-500: #6b7280;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Figtree', sans-serif;
+  --font-mono: 'Geist', sans-serif;
+  --max-w: 1440px;
+  --pad: 60px;
+  --gradient-purple-blue: linear-gradient(115deg, var(--color-purple) 0%, var(--color-blue) 100%);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+h1,h2,h3,h4,h5,h6,p,ul,ol { margin: 0; }
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-text-dark);
+  background: var(--color-bg-light);
+  -webkit-font-smoothing: antialiased;
+}
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+.gradient-text {
+  background: var(--gradient-purple-blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Page layout */
+.legal-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.legal-wrapper {
+  width: 100%;
+  max-width: 900px;
+  padding: 40px var(--pad) 100px;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid var(--color-gray-border);
+  border-radius: 50px;
+  background: var(--color-white);
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-bottom: 50px;
+}
+.back-btn:hover { background: var(--color-bg-light); border-color: #ccc; }
+.back-btn svg { width: 16px; height: 16px; stroke: var(--color-text-dark); }
+
+/* Navigation tabs */
+.legal-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+.legal-nav a {
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-border);
+  transition: all 0.2s;
+}
+.legal-nav a:hover, .legal-nav a.active {
+  background: var(--color-text-dark);
+  color: var(--color-white);
+  border-color: var(--color-text-dark);
+}
+
+/* Content sections */
+.legal-section {
+  margin-bottom: 80px;
+  padding-top: 20px;
+}
+.legal-section h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-bottom: 32px;
+  line-height: 1.2;
+}
+.legal-section h3 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin-top: 28px;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.legal-section p {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+  margin-bottom: 14px;
+}
+.legal-section ul, .legal-section ol {
+  padding-left: 24px;
+  margin-bottom: 14px;
+}
+.legal-section li {
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--color-text-dark);
+  margin-bottom: 6px;
+}
+.legal-section a {
+  color: var(--color-purple);
+  text-decoration: underline;
+}
+.legal-section a:hover { color: var(--color-blue); }
+.legal-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--color-gray-border);
+  margin: 60px 0;
+}
+.contact-block {
+  background: var(--color-white);
+  border-radius: 12px;
+  padding: 24px 30px;
+  margin: 20px 0;
+  line-height: 1.8;
+}
+
+/* Footer */
+.footer-section {
+  background: var(--color-white);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.footer-container {
+  width: 100%;
+  max-width: var(--max-w);
+  padding: 50px var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.footer-top { display: flex; align-items: flex-end; gap: 10px; width: 100%; }
+.footer-left { flex: 1; display: flex; flex-direction: column; gap: 20px; }
+.footer-logo img { height: 50px; width: 76px; object-fit: contain; }
+.footer-nav { display: flex; gap: 20px; }
+.footer-nav a {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-text-dark);
+  transition: color 0.2s;
+  text-decoration: none;
+}
+.footer-nav a:hover { color: var(--color-purple); }
+.scroll-top-btn {
+  flex: none; width: 60px; height: 60px; border-radius: 50%;
+  border: 1px solid rgba(107,114,128,0.6);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; background: transparent; color: rgba(107,114,128,0.6);
+  transition: background 0.2s;
+}
+.scroll-top-btn:hover { background: var(--color-bg-light); }
+.scroll-top-btn svg { width: 24px; height: 24px; }
+.footer-divider { width: 100%; height: 1px; background: #dedede; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+.footer-bottom p { font-family: var(--font-body); font-size: 14px; color: var(--color-gray-500); }
+</style>
+</head>
+<body>
+
+<div class="legal-page">
+  <div class="legal-wrapper">
+
+    <a href="./" class="back-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+      Back
+    </a>
+
+    <nav class="legal-nav">
+      <a href="#imprint" class="active">Imprint</a>
+      <a href="#terms">Terms & Conditions</a>
+      <a href="#privacy">Privacy Policy</a>
+    </nav>
+
+    <!-- ==========================================
+         IMPRESSUM
+         ========================================== -->
+    <section class="legal-section" id="imprint">
+      <h2>Imprint</h2>
+      <p>Information pursuant to § 5 TMG (German Telemedia Act):</p>
+
+      <div class="contact-block">
+        <strong>metavers GmbH</strong><br>
+        Krankenhausstraße 26<br>
+        89312 Günzburg<br>
+        Germany<br><br>
+        Phone: <a href="tel:+4915119393717">+49 1511 9393717</a><br>
+        Email: <a href="/cdn-cgi/l/email-protection#8ae2efe6e6e5cae7effeebfceff8f9a4eeef"><span class="__cf_email__" data-cfemail="08606d64646748656d7c697e6d7a7b266c6d">[email&#160;protected]</span></a><br>
+        Web: <a href="https://www.metavers.de" target="_blank">www.metavers.de</a>
+      </div>
+
+      <p>Managing Director: Kai C. Thomas</p>
+      <p>Registry Court: Amtsgericht Memmingen<br>Registration Number: HRB 13786</p>
+      <p>VAT Identification Number pursuant to § 27 a of the German VAT Act: DE265551531</p>
+      <p>Responsible for content pursuant to § 55 (2) RStV: Kai C. Thomas</p>
+
+      <h3>Liability for Content</h3>
+      <p>As a service provider, we are responsible for our own content on these pages in accordance with § 7 (1) TMG under general law. However, according to §§ 8 to 10 TMG, we are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. Obligations to remove or block the use of information under general law remain unaffected. However, liability in this regard is only possible from the point in time at which we become aware of a specific legal violation. Upon becoming aware of such violations, we will remove this content immediately.</p>
+
+      <h3>Liability for Links</h3>
+      <p>Our website contains links to external third-party websites over whose content we have no influence. Therefore, we cannot accept any liability for this third-party content. The respective provider or operator of the linked pages is always responsible for their content. The linked pages were checked for possible legal violations at the time of linking. Illegal content was not recognisable at the time of linking. Permanent monitoring of the content of the linked pages is unreasonable without concrete evidence of a legal violation. Upon becoming aware of legal violations, we will remove such links immediately.</p>
+
+      <h3>Copyright</h3>
+      <p>The content and works created by the site operators on these pages are subject to German copyright law. Duplication, processing, distribution, and any kind of use beyond the limits of copyright law require the written consent of the respective author or creator. Downloads and copies of this site are only permitted for private, non-commercial use. Insofar as the content on this site was not created by the operator, the copyrights of third parties are respected. Should you nevertheless become aware of a copyright infringement, please inform us accordingly. Upon becoming aware of legal violations, we will remove such content immediately.</p>
+    </section>
+
+    <div class="legal-divider"></div>
+
+    <!-- ==========================================
+         AGB
+         ========================================== -->
+    <section class="legal-section" id="terms">
+      <h2>Terms & Conditions</h2>
+      <p>metavers GmbH – General Terms and Conditions</p>
+
+      <h3>1. General</h3>
+      <p>These General Terms and Conditions apply exclusively to all business transactions between the client and metavers GmbH. Conflicting terms and conditions of the client shall only be effective if expressly acknowledged in writing by metavers. Agreements deviating from or supplementing these Terms require written form. Should individual provisions of these Terms be invalid, this shall not affect the validity of the remaining provisions.</p>
+
+      <h3>2. Conclusion of Contract</h3>
+      <p>Offers by metavers are non-binding. Orders from the client are only deemed accepted upon written order confirmation by metavers, unless metavers indicates acceptance of the order by commencing work.</p>
+
+      <h3>3. Services and Fees</h3>
+      <p>Unless otherwise agreed, the fee entitlement of metavers for each individual service begins as soon as the service has been rendered. metavers is entitled to request advance payments to cover expenses. All services not expressly covered by the concluded order must be separately agreed upon and remunerated. Cost estimates by metavers are generally non-binding. If actual costs are expected to exceed the written estimate by more than 20 percent, metavers will notify the client in writing.</p>
+
+      <h3>4. Presentations</h3>
+      <p>For presentations requested by the client, metavers is entitled to a reasonable fee covering at least the full personnel, material, and third-party expenses. If metavers does not receive an order following the presentation, all deliverables, particularly presentation materials and their content, remain the property of metavers.</p>
+
+      <h3>5. Ownership and Copyright</h3>
+      <p>All deliverables by metavers, including those from presentations, remain the property of metavers and may be reclaimed at any time. By paying the fee, the client acquires only the right to use the deliverables for the agreed purpose and scope. Copyrights to deliverables produced by metavers are non-transferable and remain with metavers in all cases.</p>
+
+      <h3>6. Attribution</h3>
+      <p>metavers is entitled to reference itself and, where applicable, the creator on all advertising materials and in all campaigns, without the client being entitled to compensation.</p>
+
+      <h3>7. Approval</h3>
+      <p>All deliverables by metavers must be reviewed by the client and approved in writing within three days. If approval is not given in time, the deliverables presented by metavers shall be deemed approved by the client.</p>
+
+      <h3>8. Deadlines</h3>
+      <p>metavers endeavours to meet agreed deadlines. Non-compliance with deadlines only entitles the client to exercise statutory rights after granting metavers a grace period of at least 14 days.</p>
+
+      <h3>9. Payment and Retention of Title</h3>
+      <p>Invoices from metavers are due promptly and without deduction from the invoice date, unless otherwise agreed. Statutory default interest applies to late payments. Delivered goods remain the property of metavers until full payment is received.</p>
+
+      <h3>10. Warranty and Liability</h3>
+      <p>metavers warrants that the deliverable is in accordance with the contract and free from defects. The client must report any defects in writing within five working days of service delivery. Claims for damages by the client are excluded unless based on intent or gross negligence by metavers.</p>
+
+      <h3>11. Liability</h3>
+      <p>To the extent permitted by law, the agency is only liable for intent and gross negligence.</p>
+
+      <h3>12. Applicable Law</h3>
+      <p>The legal relationship between the client and metavers is governed exclusively by German law.</p>
+
+      <h3>13. Place of Performance and Jurisdiction</h3>
+      <p>The exclusive place of jurisdiction for all disputes between the parties arising from or in connection with a contract concluded between them is — to the extent legally permissible — the registered office of metavers.</p>
+    </section>
+
+    <div class="legal-divider"></div>
+
+    <!-- ==========================================
+         DATENSCHUTZ
+         ========================================== -->
+    <section class="legal-section" id="privacy">
+      <h2>Privacy Policy</h2>
+
+      <h3>Introduction</h3>
+      <p>We take the protection of our users' data very seriously and are committed to protecting the information that users provide to us in connection with the use of our website. Furthermore, we are committed to protecting and using your data in accordance with applicable law.</p>
+      <p>This Privacy Policy explains our practices regarding the collection, use, and disclosure of your data through the use of our digital assets (the "Services") when you access the Services through your devices.</p>
+
+      <h3>What Data Do We Collect?</h3>
+      <ul>
+        <li>Non-identified and non-identifiable information that you provide during the registration process or that is collected through the use of our Services ("non-personal data").</li>
+        <li>Individually identifiable information, i.e. all information by which you can be identified or could be identified with reasonable effort ("personal data"). This may include names, email addresses, phone numbers, IP addresses, and more.</li>
+      </ul>
+
+      <h3>How Do We Collect Data?</h3>
+      <ul>
+        <li>We collect data when you use our Services — when you visit our digital assets and use Services, we may collect, record, and store usage and session information.</li>
+        <li>We collect data that you provide to us directly, for example when you contact us via a contact form or email.</li>
+        <li>We may collect data from third-party sources.</li>
+      </ul>
+
+      <h3>Why Do We Collect This Data?</h3>
+      <ul>
+        <li>To provide and operate our Services</li>
+        <li>To develop, customise, and improve our Services</li>
+        <li>To respond to your feedback, enquiries, and requests</li>
+        <li>To analyse usage patterns and requirements</li>
+        <li>To improve our data security and fraud prevention capabilities</li>
+        <li>To comply with applicable law, regulations, or governmental orders</li>
+      </ul>
+
+      <h3>Data Sharing</h3>
+      <p>We may share your data with our service providers to operate our Services (e.g. hosting services, technical support). Without your consent, we will not share your email address or other personal data with advertising companies or advertising networks.</p>
+
+      <h3>Cookies and Similar Technologies</h3>
+      <p>When you visit or access our Services, we authorise third parties to use web beacons, cookies, pixel tags, and other tracking technologies. These may be used to improve the navigation experience, optimise performance, and provide a customised user experience.</p>
+
+      <h3>Data Storage</h3>
+      <p>Personal data may be maintained, processed, and stored in various jurisdictions as required for the proper provision of our Services.</p>
+
+      <h3>Data Security</h3>
+      <p>The hosting service for our digital assets provides us with the online platform through which we offer you our Services. Your data is stored on secure servers behind a firewall with HTTPS access. Despite the measures taken, we cannot guarantee absolute protection and security of your data.</p>
+
+      <h3>Minors</h3>
+      <p>The Services are not intended for users who have not yet reached the legal age of majority. We will not knowingly collect data from children.</p>
+
+      <h3>Contact</h3>
+      <p>If you have questions or concerns regarding the processing of personal data, please contact us:</p>
+      <div class="contact-block">
+        metavers GmbH<br>
+        Krankenhausstraße 26, 89312 Günzburg, Germany<br>
+        Email: <a href="/cdn-cgi/l/email-protection#ea828f868685aa878f9e8b9c8f9899c48e8f"><span class="__cf_email__" data-cfemail="5e363b3232311e333b2a3f283b2c2d703a3b">[email&#160;protected]</span></a><br>
+        Phone: <a href="tel:+4915119393717">+49 1511 9393717</a>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer-section">
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-left">
+        <a href="./" class="footer-logo">
+          <img src="./assets/icons/sei-logo.png" alt="SEI Finance">
+        </a>
+        <div class="footer-nav">
+          <a href="./">Home</a>
+          <a href="./contact">Contact</a>
+          <a href="./legal#imprint">Imprint</a>
+          <a href="./legal#privacy">Privacy Policy</a>
+        </div>
+      </div>
+      <a href="#" class="scroll-top-btn" onclick="event.preventDefault();window.scrollTo({top:0,behavior:'smooth'})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>© Copyright 2025. All Rights Reserved by S
